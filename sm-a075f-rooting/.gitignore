@@ -1,7 +1,0 @@
-# Ignore firmware files
-*.tar
-*.tar.md5
-*.img
-*.tar.gz
-*.tar.bz2
-firmware/*
