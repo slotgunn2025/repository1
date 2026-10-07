@@ -2,15 +2,41 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gunn's Phone & Computer Repair</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 500px;
+      margin: 40px auto;
+      padding: 0 20px;
+      text-align: center;
+    }
+    paypal-message {
+      margin-bottom: 20px;
+      display: block;
+    }
+  </style>
 </head>
 <body>
   <h1>Gunn's Phone & Computer Repair</h1>
+
+  <!-- Pay in 4 Messaging Banner -->
+  <paypal-message auto-bootstrap amount="10.00" currency-code="CAD"></paypal-message>
+
+  <!-- PayPal Payment Buttons Container -->
   <div id="paypal-button-container"></div>
 
-  <script src="https://www.paypal.com/sdk/js?client-id=BAACnaEoFm2BkPMlpPp1XrGs5skvZXZ5RM59K1UftW9Dswftv3T4kPCclvbbr38lIdTDc1sDAN6zDikGWk&currency=CAD"></script>
+  <!-- PayPal JS SDK (Includes Buttons & Pay Later Messaging) -->
+  <script src="https://www.paypal.com/sdk/js?client-id=BAACnaEoFm2BkPMlpPp1XrGs5skvZXZ5RM59K1UftW9Dswftv3T4kPCclvbbr38lIdTDc1sDAN6zDikGWk&currency=CAD&components=buttons,messages&enable-funding=paylater"></script>
+
+  <!-- Checkout Logic -->
   <script>
     paypal.Buttons({
+      style: {
+        layout: 'vertical',
+        shape: 'rect'
+      },
       async createOrder() {
         const response = await fetch('/api/create-order', { method: 'POST' });
         const order = await response.json();
